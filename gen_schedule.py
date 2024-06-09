@@ -10,14 +10,13 @@
 
 # Colors
 colors = {  # Tag:      color
-            "Register": "A37C40",
-            "Ceremony": "98473E",
+            "Register": "CAF4FF",
+            "Ceremony": "A0DEFF",
             "Plenary":  "DB7F67",
-            "Coffee":   "E3D081",
+            "Social":   "E3D081",
             "Parallel": "91C7B1",
-            "Lunch":    "E3D081",
             "Workshop": "947BD3",
-            "Posters":  "B33951"
+            "Posters":  "B33951",
          }
 
 color_text_slot     = "000000"      # The color of the text of each time slot
@@ -31,16 +30,21 @@ color_bg_left_bar   = "FFFFFF"      # The color of the background of the left ba
 color_text_left_bar = "000000"      # The color of the text of the left bar
 
 # Sizes
-scale = 1
 slot_height = 0.8
 slot_width  = 4
+scale = 0.95
 
 # Draw auxiliar elements
 draw_grid        = True
 draw_left_bar    = True
 draw_hour_inline = True
 
-# Optional to import in the preamble (for example, for setting the font)
+# Optional extra events to add at bottom
+optional_events =   [
+                        ("20:30 - 23:30", "", "", "Social: Social dinner", "")
+                    ]
+
+# Optional commands to add at the preamble (for example, for setting the font)
 optional_packages = r"\usepackage{mathptmx}"
 
 
@@ -128,20 +132,23 @@ total_schedule_mins = end_schedule_mins - start_schedule_mins
 num_slots           = math.ceil(total_schedule_mins / 30)
 
 # Add preamble
-tex_str = r"\documentclass[a4paper, landscape]{article}"
+tex_str = "\n"
+tex_str += r"\documentclass[a4paper, landscape]{memoir}"
 tex_str += optional_packages
 tex_str += r"\pagestyle{empty}" + "\n"
+tex_str += r"\usepackage{tikz}" + "\n"
 tex_str += r"\usepackage{xcolor}" + "\n"
 tex_str += r"\usepackage{geometry}" + "\n"
 tex_str += r"\geometry{" + "\n"
-tex_str += r"top=60," + "\n"
-tex_str += r"right=0," + "\n"
-tex_str += r"bottom=0," + "\n"
-tex_str += r"left=0" + "\n"
+tex_str += r"top    = 0cm," + "\n"
+tex_str += r"right  = 0cm," + "\n"
+tex_str += r"bottom = 0cm," + "\n"
+tex_str += r"left   = 0cm" + "\n"
 tex_str += r"}" + "\n"
-tex_str += r"\usepackage{tikz}" + "\n"
+tex_str += "\n"
 
 # Define colors
+tex_str += "% Define colors\n"
 colors["grid"] = color_grid
 colors["bg_top_bar"] = color_bg_top_bar
 colors["bg_left_bar"] = color_bg_left_bar
@@ -151,25 +158,30 @@ colors["text_left_bar"] = color_text_left_bar
 
 for tag in colors:
     tex_str += r"\definecolor{" + tag + "}{HTML}{" + colors[tag] + "}\n"
+tex_str += "\n"
 
 tex_str += r"\begin{document}" + "\n"
-tex_str += r"\centering"
-tex_str += r"\begin{tikzpicture}[scale=" + str(scale) + ", every node/.style={scale=" + str(scale) + "}]" + "\n"
+tex_str += r"\centering" + "\n"
+tex_str += r"\begin{vplace}[0.6]" + "\n"
+tex_str += r"\begin{tikzpicture}[scale=" + str(scale) + ", every node/.style={scale=" + str(scale) + ", text width=" + str(slot_width) + "cm, align=center, pos=.5}]" + "\n"
 
 # Draw grid
 if draw_grid:
+    tex_str += "\n    % Draw grid\n"
     for row in range(num_slots):
-        tex_str += r"   \draw [draw=grid] (" + str(slot_width) + "," + str(slot_height*row) + ") -- (" + str(slot_width*(len(schedule)+1)) + ", " + str(slot_height*row) + ");" +  "\n"
+        tex_str += r"    \draw [draw=grid] (" + str(slot_width) + "," + str(slot_height*row) + ") -- (" + str(slot_width*(len(schedule)+1)) + ", " + str(slot_height*row) + ");" +  "\n"
 
     for col in range(len(schedule)+1):
-        tex_str += r"   \draw [draw=grid] (" + str((col+1)*slot_width) + ", 0) -- (" + str((col+1)*slot_width) + ", " + str(slot_height*num_slots) + ");" +  "\n"
+        tex_str += r"    \draw [draw=grid] (" + str((col+1)*slot_width) + ", 0) -- (" + str((col+1)*slot_width) + ", " + str(slot_height*num_slots) + ");" +  "\n"
 
 # Draw each day
 for i in range(0,len(schedule)):
-    curr_day_text = r"{\bf " + schedule[i][0] + "}"
+    curr_day_text = r"" + schedule[i][0] + ""
     pos_x         = slot_width*(i+1)
     pos_y         = num_slots*slot_height
-    tex_str += r"   \filldraw [fill=bg_top_bar,draw=grid] (" + str(pos_x) + ", " + str(pos_y) + ") rectangle (" + str(pos_x + slot_width) + ", " + str(pos_y + slot_height) + ") node[color=text_top_bar,pos=.5] {" + curr_day_text + " };" + "\n"
+
+    tex_str += "\n    % " +  curr_day_text + "\n"
+    tex_str += r"    \filldraw [fill=bg_top_bar,draw=grid] (" + str(pos_x) + ", " + str(pos_y) + ") rectangle (" + str(pos_x + slot_width) + ", " + str(pos_y + slot_height) + ") node[color=text_top_bar] {" + curr_day_text + " };" + "\n"
 
     # Draw events
     for event in schedule[i][1]:
@@ -178,10 +190,10 @@ for i in range(0,len(schedule)):
         curr_color  = event[2]
         curr_text   = event[3]
         if draw_hour_inline:
-            curr_text = r"\tiny " + event[0] + " - " + event[1] + r"\\" + curr_text
+            curr_text = r"{\scriptsize" + event[0] + " - " + event[1] + r"}\\" + curr_text
 
         # Draw
-        tex_str += r"   \filldraw [fill=" + curr_color + ",draw=grid] (" + str(pos_x) + ", " + str(pos_y_start) + ") rectangle (" + str(pos_x + slot_width) + ", " + str(pos_y_end) + ") node[align=center,color=text_slot,pos=.5,scale=0.8] {" + curr_text + " };" + "\n"
+        tex_str += r"    \filldraw [fill=" + curr_color + ",draw=grid] (" + str(pos_x) + ", " + str(pos_y_start) + ") rectangle (" + str(pos_x + slot_width) + ", " + str(pos_y_end) + ") node[color=text_slot,scale=0.8] {" + curr_text + " };" + "\n"
 
 # Draw left bar indicating hours
 if draw_left_bar:
@@ -193,11 +205,51 @@ if draw_left_bar:
 
         pos_y = (num_slots - i)*slot_height
         hour_text = curr_start_time + " - " + curr_end_time
-        tex_str += r"   \filldraw [fill=bg_left_bar,draw=grid] (0," + str(pos_y) + ") rectangle (" + str(slot_width) + ", " + str(pos_y + slot_height) + ") node[color=text_left_bar,pos=.5] {" + hour_text + " };" + "\n"
+        tex_str += r"    \filldraw [fill=bg_left_bar,draw=grid] (0," + str(pos_y) + ") rectangle (" + str(slot_width) + ", " + str(pos_y + slot_height) + ") node[color=text_left_bar] {" + hour_text + " };" + "\n"
 
         curr_end_min += 30
 
+
+# Draw optional events
+if len(optional_events) > 0:
+    tex_str += "\n    % Optional events" + "\n"
+    start_optional_events = 3*slot_height/4
+
+    if draw_grid:       # Draw grid
+        for row in range(len(optional_events)+1):
+            tex_str += r"    \draw [draw=grid] (" + str(slot_width) + "," + str(-slot_height*row - start_optional_events) + ") -- (" + str(slot_width*(len(schedule)+1)) + ", " + str(-slot_height*row - start_optional_events) + ");" +  "\n"
+
+        for col in range(len(schedule)+1):
+            tex_str += r"    \draw [draw=grid] (" + str((col+1)*slot_width) + ", " + str(-start_optional_events) + ") -- (" + str((col+1)*slot_width) + ", " + str(-start_optional_events - slot_height*len(optional_events)) + ");" +  "\n"
+
+    for row in range(len(optional_events)):
+        pos_y = -row*slot_height-start_optional_events
+        for col in range(1,len(schedule)+1):
+            pos_x = slot_width*col
+
+            if optional_events[row][col] == "":
+                continue
+
+            curr_color = optional_events[row][col].split(":")[0]     # TODO: this may should be in the parse section
+            name_list = optional_events[row][col].split(":")[1:]
+            curr_text = name_list[0]
+            for i in range(1,len(name_list)):
+                curr_text += ":" + name_list[i]
+
+            if draw_hour_inline:
+                curr_text = r"{\scriptsize" + optional_events[row][0] + r"}\\" + curr_text
+
+            # Draw
+            tex_str += r"    \filldraw [fill=" + curr_color + ",draw=grid] (" + str(pos_x) + ", " + str(pos_y ) + ") rectangle (" + str(pos_x + slot_width) + ", " + str(pos_y - slot_height) + ") node[color=text_slot,scale=0.8] {" + curr_text + " };" + "\n"
+
+    if draw_left_bar:   # Draw left bar
+        for i in range(len(optional_events)):
+            pos_y = -(i + 1)*slot_height - start_optional_events
+            hour_text = optional_events[i][0]
+            tex_str += r"    \filldraw [fill=bg_left_bar,draw=grid] (0," + str(pos_y) + ") rectangle (" + str(slot_width) + ", " + str(pos_y + slot_height) + ") node[color=text_left_bar] {" + hour_text + " };" + "\n"
+
 tex_str += r"\end{tikzpicture}" + "\n"
+tex_str += r"\end{vplace}" + "\n"
 tex_str += r"\end{document}"
 
 # Write to file
