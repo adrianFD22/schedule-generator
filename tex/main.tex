@@ -1,5 +1,99 @@
-
-\documentclass{article}
+\documentclass[a4paper, landscape]{article}\usepackage{mathptmx}\pagestyle{empty}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{
+top=60,
+right=0,
+bottom=0,
+left=0
+}
+\usepackage{tikz}
+\definecolor{Register}{HTML}{A37C40}
+\definecolor{Ceremony}{HTML}{98473E}
+\definecolor{Plenary}{HTML}{DB7F67}
+\definecolor{Coffee}{HTML}{E3D081}
+\definecolor{Parallel}{HTML}{91C7B1}
+\definecolor{Lunch}{HTML}{E3D081}
+\definecolor{Workshop}{HTML}{947BD3}
+\definecolor{Posters}{HTML}{B33951}
+\definecolor{grid}{HTML}{62aeab}
+\definecolor{bg_top_bar}{HTML}{1d8c84}
+\definecolor{bg_left_bar}{HTML}{FFFFFF}
+\definecolor{text_slot}{HTML}{000000}
+\definecolor{text_top_bar}{HTML}{FFFFFF}
+\definecolor{text_left_bar}{HTML}{000000}
 \begin{document}
-hello
+\centering\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
+   \draw [draw=grid] (4,0.0) -- (20, 0.0);
+   \draw [draw=grid] (4,0.8) -- (20, 0.8);
+   \draw [draw=grid] (4,1.6) -- (20, 1.6);
+   \draw [draw=grid] (4,2.4000000000000004) -- (20, 2.4000000000000004);
+   \draw [draw=grid] (4,3.2) -- (20, 3.2);
+   \draw [draw=grid] (4,4.0) -- (20, 4.0);
+   \draw [draw=grid] (4,4.800000000000001) -- (20, 4.800000000000001);
+   \draw [draw=grid] (4,5.6000000000000005) -- (20, 5.6000000000000005);
+   \draw [draw=grid] (4,6.4) -- (20, 6.4);
+   \draw [draw=grid] (4,7.2) -- (20, 7.2);
+   \draw [draw=grid] (4,8.0) -- (20, 8.0);
+   \draw [draw=grid] (4,8.8) -- (20, 8.8);
+   \draw [draw=grid] (4,9.600000000000001) -- (20, 9.600000000000001);
+   \draw [draw=grid] (4,10.4) -- (20, 10.4);
+   \draw [draw=grid] (4,11.200000000000001) -- (20, 11.200000000000001);
+   \draw [draw=grid] (4,12.0) -- (20, 12.0);
+   \draw [draw=grid] (4,12.8) -- (20, 12.8);
+   \draw [draw=grid] (4,13.600000000000001) -- (20, 13.600000000000001);
+   \draw [draw=grid] (4, 0) -- (4, 14.4);
+   \draw [draw=grid] (8, 0) -- (8, 14.4);
+   \draw [draw=grid] (12, 0) -- (12, 14.4);
+   \draw [draw=grid] (16, 0) -- (16, 14.4);
+   \draw [draw=grid] (20, 0) -- (20, 14.4);
+   \filldraw [fill=bg_top_bar,draw=grid] (4, 14.4) rectangle (8, 15.200000000000001) node[color=text_top_bar,pos=.5] {{\bf MONDAY 4/11} };
+   \filldraw [fill= Register,draw=grid] (4, 14.4) rectangle (8, 13.6) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 09:00 - 09:30\\ Register };
+   \filldraw [fill= Ceremony,draw=grid] (4, 13.6) rectangle (8, 12.8) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 09:30 - 10:00\\ Opening ceremony };
+   \filldraw [fill= Plenary,draw=grid] (4, 12.8) rectangle (8, 11.2) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 10:00 - 11:00\\ Plenary talk -\\ Maria Montanucci\\(DTU) };
+   \filldraw [fill= Coffee,draw=grid] (4, 11.2) rectangle (8, 10.4) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:00 - 11:30\\ Coffee break };
+   \filldraw [fill= Parallel,draw=grid] (4, 10.4) rectangle (8, 8.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:30 - 13:00\\ Parallel sessions };
+   \filldraw [fill= Lunch,draw=grid] (4, 8.0) rectangle (8, 4.800000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 13:00 - 15:00\\ Lunch };
+   \filldraw [fill= Parallel,draw=grid] (4, 4.800000000000001) rectangle (8, 3.200000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 15:00 - 16:00\\ Parallel sessions };
+   \filldraw [fill= Workshop,draw=grid] (4, 3.200000000000001) rectangle (8, 0.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 16:00 - 18:00\\ Workshop };
+   \filldraw [fill=bg_top_bar,draw=grid] (8, 14.4) rectangle (12, 15.200000000000001) node[color=text_top_bar,pos=.5] {{\bf TUESDAY 5/11} };
+   \filldraw [fill= Plenary,draw=grid] (8, 13.6) rectangle (12, 12.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 09:30 - 10:30\\ Plenary talk -\\ Iacopo P. Longo\\(Imperial) };
+   \filldraw [fill= Coffee,draw=grid] (8, 12.0) rectangle (12, 11.2) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 10:30 - 11:00\\ Coffee break };
+   \filldraw [fill= Parallel,draw=grid] (8, 11.2) rectangle (12, 8.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:00 - 13:00\\ Parallel sessions };
+   \filldraw [fill= Lunch,draw=grid] (8, 8.0) rectangle (12, 4.800000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 13:00 - 15:00\\ Lunch };
+   \filldraw [fill= Parallel,draw=grid] (8, 4.800000000000001) rectangle (12, 3.200000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 15:00 - 16:00\\ Parallel sessions };
+   \filldraw [fill= Workshop,draw=grid] (8, 3.200000000000001) rectangle (12, 0.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 16:00 - 18:00\\ Workshop };
+   \filldraw [fill=bg_top_bar,draw=grid] (12, 14.4) rectangle (16, 15.200000000000001) node[color=text_top_bar,pos=.5] {{\bf WEDNESDAY 6/11} };
+   \filldraw [fill= Plenary,draw=grid] (12, 13.6) rectangle (16, 12.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 09:30 - 10:30\\ Plenary talk -\\ Giogia Zaccaria\\(UNIMIB) };
+   \filldraw [fill= Workshop,draw=grid] (12, 12.0) rectangle (16, 11.2) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 10:30 - 11:00\\ };
+   \filldraw [fill= Coffee,draw=grid] (12, 11.2) rectangle (16, 10.4) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:00 - 11:30\\ Coffee break };
+   \filldraw [fill= Parallel,draw=grid] (12, 10.4) rectangle (16, 8.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:30 - 13:00\\ Parallel sessions };
+   \filldraw [fill= Lunch,draw=grid] (12, 8.0) rectangle (16, 4.800000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 13:00 - 15:00\\ Lunch };
+   \filldraw [fill= Parallel,draw=grid] (12, 4.800000000000001) rectangle (16, 3.200000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 15:00 - 16:00\\ Parallel sessions };
+   \filldraw [fill= Posters,draw=grid] (12, 3.200000000000001) rectangle (16, 0.8000000000000007) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 16:00 - 17:30\\ Coffee break, poster\\session and stands\\from sponsors };
+   \filldraw [fill=bg_top_bar,draw=grid] (16, 14.4) rectangle (20, 15.200000000000001) node[color=text_top_bar,pos=.5] {{\bf THURSDAY 7/11} };
+   \filldraw [fill= Plenary,draw=grid] (16, 13.6) rectangle (20, 12.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 09:30 - 10:30\\ Plenary talk -\\ Javier Jiménez-Garrido\\(UC) };
+   \filldraw [fill= Coffee,draw=grid] (16, 12.0) rectangle (20, 11.2) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 10:30 - 11:00\\ Coffee break };
+   \filldraw [fill= Parallel,draw=grid] (16, 11.2) rectangle (20, 8.0) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 11:00 - 13:00\\ Parallel sessions };
+   \filldraw [fill= Ceremony,draw=grid] (16, 8.0) rectangle (20, 7.2) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 13:00 - 13:30\\ Closing ceremony };
+   \filldraw [fill= Lunch,draw=grid] (16, 7.2) rectangle (20, 4.800000000000001) node[align=center,color=text_slot,pos=.5,scale=0.8] {\tiny 13:30 - 15:00\\ Lunch };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,13.600000000000001) rectangle (4, 14.400000000000002) node[color=text_left_bar,pos=.5] {09:00 - 09:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,12.8) rectangle (4, 13.600000000000001) node[color=text_left_bar,pos=.5] {09:30 - 10:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,12.0) rectangle (4, 12.8) node[color=text_left_bar,pos=.5] {10:00 - 10:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,11.200000000000001) rectangle (4, 12.000000000000002) node[color=text_left_bar,pos=.5] {10:30 - 11:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,10.4) rectangle (4, 11.200000000000001) node[color=text_left_bar,pos=.5] {11:00 - 11:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,9.600000000000001) rectangle (4, 10.400000000000002) node[color=text_left_bar,pos=.5] {11:30 - 12:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,8.8) rectangle (4, 9.600000000000001) node[color=text_left_bar,pos=.5] {12:00 - 12:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,8.0) rectangle (4, 8.8) node[color=text_left_bar,pos=.5] {12:30 - 13:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,7.2) rectangle (4, 8.0) node[color=text_left_bar,pos=.5] {13:00 - 13:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,6.4) rectangle (4, 7.2) node[color=text_left_bar,pos=.5] {13:30 - 14:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,5.6000000000000005) rectangle (4, 6.4) node[color=text_left_bar,pos=.5] {14:00 - 14:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,4.800000000000001) rectangle (4, 5.6000000000000005) node[color=text_left_bar,pos=.5] {14:30 - 15:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,4.0) rectangle (4, 4.8) node[color=text_left_bar,pos=.5] {15:00 - 15:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,3.2) rectangle (4, 4.0) node[color=text_left_bar,pos=.5] {15:30 - 16:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,2.4000000000000004) rectangle (4, 3.2) node[color=text_left_bar,pos=.5] {16:00 - 16:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,1.6) rectangle (4, 2.4000000000000004) node[color=text_left_bar,pos=.5] {16:30 - 17:00 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,0.8) rectangle (4, 1.6) node[color=text_left_bar,pos=.5] {17:00 - 17:30 };
+   \filldraw [fill=bg_left_bar,draw=grid] (0,0.0) rectangle (4, 0.8) node[color=text_left_bar,pos=.5] {17:30 - 18:00 };
+\end{tikzpicture}
 \end{document}
